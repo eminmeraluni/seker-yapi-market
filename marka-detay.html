@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marka Ürünleri | Şeker Yapı Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-sm p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center text-blue-900 font-bold hover:text-blue-600 transition">
+                <i class="fas fa-arrow-left mr-2"></i> Ana Sayfaya Dön
+            </a>
+            
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center hover:opacity-80 transition">
+                    <img src="sekeryapilogo.png" alt="Şeker Yapı Market" class="h-10 w-auto">
+                </a>
+                <span id="marka-baslik" class="text-lg font-black uppercase text-slate-800 border-l-2 border-blue-600 pl-3 ml-3"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto py-12 px-6">
+        <div id="urun-listesi" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        </div>
+    </main>
+
+    <footer id="iletisim" class="bg-slate-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12 border-b border-slate-800 pb-12 text-center md:text-left">
+            <div>
+                <h4 class="text-white font-bold text-lg mb-4 uppercase">Şeker Yapı Market</h4>
+                <p class="text-sm leading-relaxed italic">"İnşaatınıza Şeker tadında çözümler."</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-lg mb-4 uppercase">Mağazamız</h4>
+                <p class="text-sm">
+                    <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                    Karaer, Fuadiye Cd. No:1/A, 29000 Gümüşhane Merkez/Gümüşhane
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-lg mb-4 uppercase">İletişim</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><i class="fas fa-phone-alt mr-2 text-blue-500"></i> 0507 709 7569 (Yunus Emre Şeker)</li>
+                    <li><i class="fas fa-envelope mr-2 text-blue-500"></i> info@sekeryapi.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-xs text-gray-500 tracking-widest uppercase">
+            &copy; 2026 Selaix Yazılım/Donanım Şirketi Muhammet Emin Meral. Tüm Hakları Saklıdır.
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const secilenMarka = urlParams.get('marka');
+        document.getElementById('marka-baslik').innerText = secilenMarka ? secilenMarka : "Ürünler";
+
+        // Tüm klasör ve dosya isimleri küçük harf yapıldı
+        const veriTabani = {
+            'Marshall': [
+                { ad: 'Sil-Pak Silinebilir Boya', fiyat: 'Sorunuz', img: 'urunler/marshalllogo.png' },
+                { ad: 'Cuprinol Bahçe Mobilyası Boyası', fiyat: 'Sorunuz', img: 'urunler/marshalllogo.png' }
+            ],
+            'KaleKilit': [
+                { ad: 'Çelik Kapı Kilidi', fiyat: 'Sorunuz', img: 'urunler/kalekilitlogo.png' }
+            ],
+            'FilliBoya': [
+                { ad: 'Momento Max İç Cephe', fiyat: 'Sorunuz', img: 'urunler/filliboyalogo.png' }
+            ],
+            'ECA': [
+                { ad: 'Mavi Seri Banyo Bataryası', fiyat: 'Sorunuz', img: 'urunler/ecalogo.png' }
+            ],
+            'Canakkale': [
+                { ad: 'Banyo Duvar Seramiği', fiyat: 'Sorunuz', img: 'urunler/canakkaleseramiklogo.png' }
+            ],
+            'KaleBanyo': [
+                { ad: 'Modern Lavabo Seti', fiyat: 'Sorunuz', img: 'urunler/kalebanyologo.png' }
+            ],
+            'Kalebodur': [
+                { ad: 'Geniş Ebatlı Yer Karosu', fiyat: 'Sorunuz', img: 'urunler/kalebodurlogo.png' }
+            ]
+        };
+
+        const listeContainer = document.getElementById('urun-listesi');
+        const secilenUrunler = veriTabani[secilenMarka] || [];
+
+        if (secilenUrunler.length > 0) {
+            secilenUrunler.forEach(urun => {
+                listeContainer.innerHTML += `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="h-48 bg-gray-50 flex items-center justify-center p-6">
+                            <img src="${urun.img}" alt="${urun.ad}" class="max-h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=Resim+Yok'">
+                        </div>
+                        <div class="p-5 border-t border-gray-50">
+                            <h3 class="font-bold text-slate-800 mb-2">${urun.ad}</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">${urun.fiyat}</span>
+                                <a href="https://wa.me/905077097569?text=${secilenMarka} - ${urun.ad} hakkında fiyat bilgisi almak istiyorum." 
+                                   class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition flex items-center justify-center w-10 h-10">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        } else {
+            listeContainer.innerHTML = `<div class="col-span-full text-center py-20 text-gray-500 text-lg">${secilenMarka} ürünleri güncelleniyor.</div>`;
+        }
+    </script>
+</body>
+</html>
